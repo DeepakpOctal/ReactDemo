@@ -6,6 +6,7 @@ import ListItem from "@material-ui/core/ListItem";
 
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import Dialog from "./Dialog.js"
 
 
 const useStyles = theme =>({
@@ -26,7 +27,8 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data : []
+            data : [],
+            openDialog : false
         }
 
     }
@@ -37,7 +39,12 @@ class MainContainer extends Component {
             .then(data => this.setState({ data : data }));
     }
 
-   
+   onClickDialog = (e) => {
+    this.setState({
+        openDialog : true
+    })
+    console.log("calling")
+   }
      
 
     render() {
@@ -51,6 +58,7 @@ class MainContainer extends Component {
         return (
             <React.Fragment>
                 <CssBaseline />
+                        
                
                         <div className={classes.root}>
 
@@ -58,9 +66,12 @@ class MainContainer extends Component {
                                 {
                                     this.state.data.map((value) => (
                                         <div>
-                                        <ListItem button onClick = {() => {console.log("hi")}}>
+                                        <Dialog  title = {value.title}>
+                                        {/* <ListItem button onClick = {() => {this.onClickDialog()}}>
                                         <ListItemText primary={value.title} />
-                                         </ListItem>
+                                         </ListItem> */}
+                                        
+                                         </Dialog>
                                          <Divider />
                                          </div>
                                     ))
