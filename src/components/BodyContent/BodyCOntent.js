@@ -26,7 +26,7 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: ''
+            data : []
         }
 
     }
@@ -34,44 +34,19 @@ class MainContainer extends Component {
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
-            .then(data => this.setState({ data }));
+            .then(data => this.setState({ data : data }));
     }
 
-    data = () => {
-        let apiData = this.state.data
-        let objectList = []
-
-        for (let i = 0; i <= apiData.length; i++) {
-            objectList.push(apiData[i])
-
-        }
-        console.log(objectList)
-    }
-     getValueByKey(object, key) { 
-        for (var prop in object) { 
-            if (object.hasOwnProperty(prop)) { 
-                if (object[prop] === key) 
-                return prop; 
-            } 
-        } 
-    } 
-
-
+   
+     
 
     render() {
+        //this.check()
         const { classes } = this.props;
         // this.data()
-        // console.log("may", this.state.data)
+       
 
-        let apiData = this.state.data
-        let objectList = []
-
-        for (let i = 0; i <= apiData.length; i++) {
-            objectList.push(apiData[i])
-
-        }
-        let h = objectList[0]
-        console.log( this.getValueByKey(h, "item"))
+       
        
         return (
             <React.Fragment>
@@ -81,10 +56,10 @@ class MainContainer extends Component {
 
                             <List component="nav" aria-label="secondary mailbox folders">
                                 {
-                                    objectList.map((data) => (
+                                    this.state.data.map((value) => (
                                         <div>
                                         <ListItem button onClick = {() => {console.log("hi")}}>
-                                        <ListItemText primary="Trash" />
+                                        <ListItemText primary={value.title} />
                                          </ListItem>
                                          <Divider />
                                          </div>
