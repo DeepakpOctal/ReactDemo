@@ -18,9 +18,7 @@ const useStyles = theme =>({
     }
 });
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
+
 
 class MainContainer extends Component {
 
@@ -67,9 +65,7 @@ class MainContainer extends Component {
                                     this.state.data.map((value) => (
                                         <div>
                                         <Dialog  title = {value.title}>
-                                        {/* <ListItem button onClick = {() => {this.onClickDialog()}}>
-                                        <ListItemText primary={value.title} />
-                                         </ListItem> */}
+                                        
                                         
                                          </Dialog>
                                          <Divider />
