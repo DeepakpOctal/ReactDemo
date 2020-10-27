@@ -8,18 +8,29 @@ import Container from '@material-ui/core/Container';
 import contactDetails from './dataStore';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
         '& > *': {
-            margin: theme.spacing(1),
-            width: theme.spacing(16),
-            height: theme.spacing(16),
+            margin: theme.spacing(7),
+            width: theme.spacing(150),
+            height: theme.spacing(60),
         },
-        
+
     },
+    contactGrid : {
+        flexGrow: 1,
+    },
+    contactPaper: {
+        padding: theme.spacing(2),
+        margin: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  
+    }
 });
 
 
@@ -31,7 +42,7 @@ class MainContainer extends Component {
         this.state = {
             data: [],
             openDialog: false,
-            mainData:contactDetails
+            mainData: contactDetails
         }
 
     }
@@ -68,18 +79,34 @@ class MainContainer extends Component {
                 <CssBaseline />
                 <Container maxWidth="xl">
                     <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} >
-           
-                    <div className={classes.root}>
-                        <Paper elevation={3} style={{margin:"auto",width:"80%"}} >
-                        <div style={{margin:"15px"}}>
-                    <h3>List of Contacts</h3>
-                    </div>
-                    
-                  
+
+                        <div className={classes.root}>
+                            <Paper elevation={3} >
+                                <div style={{ margin: "15px" }}>
+                                    <h3>List of Contacts</h3>
+                                </div>
+                                {
+                                    this.state.mainData.map((item, key) => {
+                                        return (
+                                            <div className={classes.contactGrid}>
+                                            <Grid container spacing={3}>
+        
+                                                <Grid item xs={3}>
+                                                    <Paper variant="outlined" className={classes.contactPaper}>xs=3</Paper>
+                                                </Grid>
+        
+                                            </Grid>
+                                        </div>
+                                        )
+                                    })
+                                }
+                               
+
+
                             </Paper>
-                        
-                    </div>
-                        </Typography>
+
+                        </div>
+                    </Typography>
 
                 </Container>
             </React.Fragment>
