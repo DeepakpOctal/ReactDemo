@@ -9,6 +9,10 @@ import contactDetails from './dataStore';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Person from '@material-ui/icons/PersonOutlineOutlined';
+import Phone from '@material-ui/icons/PhoneOutlined';
+import Email from '@material-ui/icons/EmailOutlined';
+import Button from '@material-ui/core/Button';
 
 const useStyles = theme => ({
     root: {
@@ -21,16 +25,20 @@ const useStyles = theme => ({
         },
 
     },
-    contactGrid : {
+    contactGrid: {
         flexGrow: 1,
     },
     contactPaper: {
-        padding: theme.spacing(2),
-        margin: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  
-    }
+        padding: theme.spacing(1),
+        margin: theme.spacing(2),
+        color: theme.palette.text.secondary,
+
+    },
+    contactButton: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
 });
 
 
@@ -89,18 +97,32 @@ class MainContainer extends Component {
                                     this.state.mainData.map((item, key) => {
                                         return (
                                             <div className={classes.contactGrid}>
-                                            <Grid container spacing={3}>
-        
-                                                <Grid item xs={3}>
-                                                    <Paper variant="outlined" className={classes.contactPaper}>xs=3</Paper>
+                                                <Grid container spacing={3} direction="column">
+
+                                                    <Grid item xs={3}>
+                                                        <Paper variant="outlined" className={classes.contactPaper}>
+
+                                                            <Person /><p>{item.name}</p>
+
+                                                            <Button variant="outlined" color="primary">
+                                                                Edit
+                                                            </Button>
+
+                                                            <Button variant="outlined" color="secondary" >
+                                                                Delete
+                                                             </Button>
+
+                                                        </Paper>
+                                                    </Grid>
+
                                                 </Grid>
-        
-                                            </Grid>
-                                        </div>
+                                            </div>
                                         )
                                     })
                                 }
-                               
+
+                                <Button style={{ borderRadius: 50 }} size = "large" variant="contained" color="">Add New -></Button>
+
 
 
                             </Paper>
