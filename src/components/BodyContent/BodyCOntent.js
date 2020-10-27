@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
+
+import { withStyles } from "@material-ui/core/styles";
+
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import contactDetails from './dataStore';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import Dialog from "./Dialog.js"
-
-
-const useStyles = theme =>({
+const useStyles = theme => ({
     root: {
-        width: "100%",
-        maxWidth: "100%",
-        backgroundColor: theme.palette.background.paper,
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(1),
+            width: theme.spacing(16),
+            height: theme.spacing(16),
+        },
         
-    }
+    },
 });
 
 
@@ -25,8 +29,9 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data : [],
-            openDialog : false
+            data: [],
+            openDialog: false,
+            mainData:contactDetails
         }
 
     }
@@ -34,52 +39,52 @@ class MainContainer extends Component {
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
-            .then(data => this.setState({ data : data }));
+            .then(data => this.setState({ data: data }));
+
+
+
     }
 
-   onClickDialog = (e) => {
-    this.setState({
-        openDialog : true
-    })
-    console.log("calling")
-   }
-     
+    onClickDialog = (e) => {
+        this.setState({
+            openDialog: true
+        })
+        console.log("calling")
+    }
+
 
     render() {
         //this.check()
         const { classes } = this.props;
         // this.data()
-       
 
-       
-       
+        console.log("dkrgb", contactDetails)
+
+
+
+
         return (
             <React.Fragment>
                 <CssBaseline />
+                <Container maxWidth="xl">
+                    <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} >
+           
+                    <div className={classes.root}>
+                        <Paper elevation={3} style={{margin:"auto",width:"80%"}} >
+                        <div style={{margin:"15px"}}>
+                    <h3>List of Contacts</h3>
+                    </div>
+                    
+                  
+                            </Paper>
                         
-               
-                        <div className={classes.root}>
+                    </div>
+                        </Typography>
 
-                            <List component="nav" aria-label="secondary mailbox folders">
-                                {
-                                    this.state.data.map((value) => (
-                                        <div>
-                                        <Dialog  title = {value.title}>
-                                        
-                                        
-                                         </Dialog>
-                                         <Divider />
-                                         </div>
-                                    ))
-                                }
-                               
-                               
-                            </List>
-                        </div>
-                 
+                </Container>
             </React.Fragment>
-        );
+        )
     }
 }
 
-export default  withStyles(useStyles)(MainContainer)
+export default withStyles(useStyles)(MainContainer)

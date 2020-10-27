@@ -29,28 +29,32 @@ export default function FormDialog(props) {
 
   return (
     <div>
-      <ListItem button onClick = {() => {handleClickOpen()}}>
-                                        <ListItemText primary={props.title} />
-                                         </ListItem>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <ListItem button onClick={() => { handleClickOpen() }}>
+        <ListItemText primary={props.title} />
+      </ListItem>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth = 'xl'>
         <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            
+
           </DialogContentText>
           <TextField
+            id="filled-multiline-flexible"
+            multiline
+            rowsMax={4}
             autoFocus
             margin="dense"
             id="name"
-          
-           
+            value={props.body}
+
+
             fullWidth
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
+        <DialogActions >
+          {/* <Button onClick={handleClose} color="primary" >
             Cancel
-          </Button>
+          </Button> */}
           <Button onClick={handleClose} color="primary">
             Save
           </Button>
